@@ -25,9 +25,16 @@
     "type": "git",
     "url": "git+https://github.com/soelen/storybook-rem.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "storybook",
+    "storybook-addons",
+    "style",
+    "elastic",
+    "font-size",
+    "rem"
+  ],
+  "author": "Uwe Sölen Flaig",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/soelen/storybook-rem/issues"
   },
