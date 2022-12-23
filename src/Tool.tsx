@@ -1,8 +1,8 @@
 import { API } from '@storybook/api'
 import { IconButton, WithTooltip, TooltipLinkList } from '@storybook/components';
 
-import React, { FunctionComponent, ReactNode, useState } from 'react';
-import Increase from './icons/Increase';
+import React, { FunctionComponent, ReactNode, } from 'react';
+import Rem from './icons/Rem';
 
 interface Props {
   api: API
@@ -24,13 +24,19 @@ const updatePreview = ( fontSize: number ) => {
   const root = iframeDocument?.querySelector<HTMLElement>(':root');
 
   if ( !root ) return;
+
+
   const style = window.getComputedStyle( root, null ).getPropertyValue('font-size');
 
   // const fontSize = parseFloat(style);
   // root.style.fontSize = `${ fontSize - 2 }px`;
   root.style.fontSize = `${ fontSize }px`;
 
-  // toggleDarkClass(target, store);
+  // Remove rem padding from iframe body
+
+  const body = root.querySelector( 'body' ) as HTMLBodyElement;
+  if( !body ) return;
+  body.style.padding = `16px`;
 };
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -98,7 +104,7 @@ const Tool: FunctionComponent<Props> = ( { api } ) => {
         <IconButton
           title="Change root font size"
         >
-          <Increase />
+          <Rem />
         </IconButton>
       </WithTooltip>
     </>

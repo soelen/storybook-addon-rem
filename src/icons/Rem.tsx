@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from 'react';
 
-const Increase = () => {
+interface Props {
+}
+
+const Rem: FunctionComponent<Props> = () => {
   return(
     <svg
       version="1.1"
@@ -15,4 +18,4 @@ const Increase = () => {
   )
 }
 
-export default Increase;
+export default Rem;

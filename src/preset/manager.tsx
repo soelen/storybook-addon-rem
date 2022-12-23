@@ -1,16 +1,12 @@
 import { addons, types } from '@storybook/addons';
-import { themes } from '@storybook/theming';
 import * as React from 'react';
+import { ADDON_ID, TOOLBAR_ID } from '../constants';
 
 import Tool from '../Tool';
-// , { prefersDark, store }
 
-// const currentStore = store();
-// const currentTheme = currentStore.current || (prefersDark.matches && 'dark') || 'light';
-
-addons.register('storybook/dark-mode', (api) => {
-  addons.add('storybook/dark-mode', {
-    title: 'dark mode',
+addons.register( ADDON_ID, (api) => {
+  addons.add( TOOLBAR_ID, {
+    title: 'Rem',
     type: types.TOOL,
     match: ({ viewMode }) => viewMode === 'story' || viewMode === 'docs',
     render: () => <Tool api={api} />,
