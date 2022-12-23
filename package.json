@@ -31,6 +31,7 @@
     "addons",
     "storybook-addons",
     "style",
+    "CSS",
     "elastic",
     "font-size",
     "rem"
@@ -64,6 +65,11 @@
     "icon": "https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/icon.gif",
     "unsupportedFrameworks": [
       "react-native"
+    ],
+    "supportedFrameworks": [
+      "webcomponents",
+      "react",
+      "vue"
     ]
   }
 }
