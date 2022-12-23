@@ -48,7 +48,11 @@ type RootFontsize = {
   };
 }
 
-let active: Size = 'md';
+/**
+ * Non reactive state. Seems to be working for now.
+ */
+
+let activeState: Size = 'md';
 
 const rootFontsizes: RootFontsize = {
   xs: { value: 8, title: 'Extra Small' },
@@ -67,10 +71,11 @@ interface Link {
   onClick: () => void;
 }
 
-const somethingClicked = ( size: Size ) => {
-  active = size;
+const onClick = ( size: Size ) => {
+  activeState = size;
   updatePreview( rootFontsizes[size].value );
-}
+};
+
 const createList = ( onHide: () => void, active: Size ):Link[] => {
   return Object.keys( rootFontsizes ).map(( key ) => {
     const size = key as Size;
@@ -82,7 +87,7 @@ const createList = ( onHide: () => void, active: Size ):Link[] => {
     right: <div>{ rootFontsizes[ size ].value }px</div>,
     active: size === active ? true : false ,
     onClick: () => {
-      somethingClicked( size );
+      onClick( size );
       onHide();
     },
   })
@@ -96,7 +101,7 @@ const Tool: FunctionComponent<Props> = ( { api } ) => {
         placement="top"
         trigger="click"
         tooltip={({ onHide }) => {
-          const list = createList( onHide, active )
+          const list = createList( onHide, activeState )
           return <TooltipLinkList links={list} />;
         }}
         closeOnClick

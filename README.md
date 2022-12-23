@@ -1,5 +1,5 @@
 
-# Storybook REM
+# Storybook Addon REM
 
 ![Storybook REM preview](https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/preview.gif)
 
@@ -47,7 +47,22 @@ then start storybook with
 npm run storybook
 ```
 
+**Notice**: This storybook insance requires a lower node version than 18.
+If needed: Install [NVM](https://github.com/nvm-sh/nvm) and switch to a
+lower version of nodejs e.g. `v16.19.0` also known as `lts/gallium`:
+
+```
+nvm i lts/gallium
+nvm use lts/gallium
+```
+
+## Roadmap
+
+- Update icon(s)
+- Integrate Storybook events
+
 ## Notes
 
-- Kudos to [storybook-dark-mode](https://github.com/hipstersmoothie/storybook-dark-mode) and its contributors. I learned and adapted a lot from its repository.
-- Thanks to [@storybook/a11y](https://github.com/storybookjs/storybook/tree/master/addons/a11y) for showing how to implement a storybook toolbar.
+- Code structure greatly inspired by [storybook-dark-mode](https://github.com/hipstersmoothie/storybook-dark-mode). I learned and adapted a lot ❤️
+- Kudos to [@storybook/a11y](https://github.com/storybookjs/storybook/tree/master/addons/a11y) repository for showing how to implement a storybook toolbar with a tooltip.
+
