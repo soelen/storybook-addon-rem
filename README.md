@@ -13,12 +13,6 @@ Install the addon:
 npm i storybook-rem --dev
 ```
 
-or with yarn:
-
-```
-yarn add -D storybook-rem
-```
-
 Last but not least, add following content to .storybook/main.js
 
 ```
@@ -26,6 +20,36 @@ module.exports = {
   addons: ['storybook-rem']
 };
 ```
+
+## Run and test addon locally
+
+run the build:watch proces:
+
+```
+npm build:watch
+```
+
+open a second terminal. Go to `examples/basic`.
+
+```
+cd example/basic/
+```
+
+This is a plain storybook setup where this addon has been integrated. Install dependencies with
+
+```
+npm i
+```
+
+then start storybook with
+
+```
+npm run storybook
+```
+
+
+
+
 
 ## Notes
 
