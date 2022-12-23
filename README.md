@@ -3,7 +3,7 @@
 
 ![Storybook REM preview](https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/preview.gif)
 
-A storybook addon that lets your users change the root font size.
+A storybook addon which helps you to test how your REM sized components behave.
 
 ## Getting started
 
