@@ -1,7 +1,7 @@
 {
   "name": "storybook-rem",
   "version": "1.0.0",
-  "description": "",
+  "description": "A storybook addon that lets your users change the root font size.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/ts/index.d.ts",
@@ -49,5 +49,12 @@
     "@storybook/components": "^6.5.15",
     "@storybook/theming": "^6.5.15",
     "@types/react": "^18.0.26"
+  },
+  "storybook": {
+    "displayName": "Rem",
+    "icon": "https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/preview.gif",
+    "unsupportedFrameworks": [
+      "react-native"
+    ]
   }
 }
