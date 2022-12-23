@@ -8,6 +8,7 @@
   "files": [
     "src",
     "dist",
+    "README.md",
     "preset.js"
   ],
   "scripts": {
@@ -27,6 +28,7 @@
   },
   "keywords": [
     "storybook",
+    "addons",
     "storybook-addons",
     "style",
     "elastic",
