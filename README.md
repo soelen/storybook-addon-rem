@@ -5,6 +5,10 @@
 
 A storybook addon which helps you to test how your REM sized components behave.
 
+## Why and when to use REM
+
+[Aleksandr Hovhannisyan](https://www.aleksandrhovhannisyan.com/blog/use-rems-for-font-size/) wrote an awesome article about [rems for font size](https://www.aleksandrhovhannisyan.com/blog/use-rems-for-font-size/). Check it out if you want to learn more about this unit.
+
 ## Getting started
 
 Install the addon:
@@ -20,6 +24,7 @@ module.exports = {
   addons: ['storybook-addon-rem']
 };
 ```
+
 
 ## Run and test addon locally
 
@@ -47,7 +52,7 @@ then start storybook with
 npm run storybook
 ```
 
-**Notice**: This storybook insance requires a lower node version than 18.
+**Notice**: This storybook instance requires a lower node version than 18.
 If needed: Install [NVM](https://github.com/nvm-sh/nvm) and switch to a
 lower version of nodejs e.g. `v16.19.0` also known as `lts/gallium`:
 
