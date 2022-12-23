@@ -1,7 +1,7 @@
 {
   "name": "storybook-rem",
   "version": "1.0.7",
-  "description": "A storybook addon that lets your users change the root font size.",
+  "description": "A storybook addon which helps you to test how your REM sized components behave.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/ts/index.d.ts",
@@ -71,6 +71,9 @@
     ],
     "supportedFrameworks": [
       "webcomponents",
+      "lit",
+      "preact",
+      "svelte",
       "react",
       "vue"
     ]
