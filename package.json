@@ -61,7 +61,7 @@
   },
   "storybook": {
     "displayName": "Rem",
-    "icon": "https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/preview.gif",
+    "icon": "https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/icon.gif",
     "unsupportedFrameworks": [
       "react-native"
     ]

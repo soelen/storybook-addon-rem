@@ -3,7 +3,6 @@ import { IconButton, WithTooltip, TooltipLinkList } from '@storybook/components'
 
 import React, { FunctionComponent, ReactNode, useState } from 'react';
 import Increase from './icons/Increase';
-import Decrease from './icons/Descrease';
 
 interface Props {
   api: API
@@ -87,30 +86,21 @@ const createList = ( onHide: () => void, active: Size ):Link[] => {
 const Tool: FunctionComponent<Props> = ( { api } ) => {
   return(
     <>
-        <WithTooltip
+      <WithTooltip
         placement="top"
         trigger="click"
         tooltip={({ onHide }) => {
           const list = createList( onHide, active )
-          // const list = [
-          //   createList( 'xs', 'Extra Small', onHide ),
-          //   createList( 'sm', 'Small', onHide ),
-          //   createList( 'md', 'Medium', onHide ),
-          // ]
           return <TooltipLinkList links={list} />;
         }}
         closeOnClick
       >
-      <IconButton
-        title="Change theme to light mode"
-      >
-      <Increase />
-      </IconButton>
-        </WithTooltip>
-      <IconButton
-        title="Change theme to light mode"
-        onClick={() => {}}
-      ><Increase /></IconButton>
+        <IconButton
+          title="Change root font size"
+        >
+          <Increase />
+        </IconButton>
+      </WithTooltip>
     </>
   )
 }
