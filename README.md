@@ -1,7 +1,7 @@
 
 # Storybook Addon REM
 
-![Storybook REM preview](https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/preview.gif)
+![Storybook REM preview](https://raw.githubusercontent.com/soelen/storybook-addon-rem/master/.github/images/preview.gif)
 
 A storybook addon which helps you to test how your REM sized components behave.
 
@@ -10,14 +10,14 @@ A storybook addon which helps you to test how your REM sized components behave.
 Install the addon:
 
 ```
-npm i storybook-rem --dev
+npm i storybook-addon-rem --dev
 ```
 
 Add following content to `.storybook/main.(js|mjs|cjs)`:
 
 ```
 module.exports = {
-  addons: ['storybook-rem']
+  addons: ['storybook-addon-rem']
 };
 ```
 

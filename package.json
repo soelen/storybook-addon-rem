@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soelen/storybook-rem.git"
+    "url": "git+https://github.com/soelen/storybook-addon-rem.git"
   },
   "keywords": [
     "storybook",
@@ -47,9 +47,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/soelen/storybook-rem/issues"
+    "url": "https://github.com/soelen/storybook-addon-rem/issues"
   },
-  "homepage": "https://github.com/soelen/storybook-rem#readme",
+  "homepage": "https://github.com/soelen/storybook-addon-rem#readme",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/preset-env": "^7.20.2",
@@ -70,7 +70,7 @@
   },
   "storybook": {
     "displayName": "Rem",
-    "icon": "https://raw.githubusercontent.com/soelen/storybook-rem/master/.github/images/icon.gif",
+    "icon": "https://raw.githubusercontent.com/soelen/storybook-addon-rem/master/.github/images/icon.gif",
     "unsupportedFrameworks": [
       "react-native"
     ],
