@@ -36,7 +36,10 @@
     "font-size",
     "rem"
   ],
-  "author": "Uwe Sölen Flaig",
+  "author": {
+    "name": "Uwe Sölen Flaig",
+    "email": "uwe.soelen.flaig@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/soelen/storybook-rem/issues"
