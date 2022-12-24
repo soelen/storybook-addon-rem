@@ -75,8 +75,8 @@
       "react-native"
     ],
     "supportedFrameworks": [
-      "webcomponents",
-      "lit",
+      "web components",
+      "angular",
       "preact",
       "svelte",
       "react",
