@@ -3,7 +3,7 @@ import { IconButton, WithTooltip, TooltipLinkList } from '@storybook/components'
 import { DOCS_RENDERED } from '@storybook/core-events';
 
 import React, { FunctionComponent, ReactNode, useEffect, } from 'react';
-import { ADDON_ID } from './constants';
+import { ADDON_ID, ON_REM_UPDATE } from './constants';
 import Rem from './icons/Rem';
 
 /**
@@ -44,7 +44,7 @@ const updatePreview = () => {
   }
 };
 
-type RootFontsize = {
+export interface Fontsize {
   value: number,
   title: string,
 }
@@ -57,12 +57,7 @@ interface Link {
   onClick: () => void;
 }
 
-const onClick = ( fontSize: number ) => {
-  state.fontSize = fontSize;
-  updatePreview();
-};
-
-const createList = ( onHide: () => void, state: State ):Link[] => {
+const createList = ( onCallback: () => void, state: State ):Link[] => {
   return state.sizes.map(( size ) => {
     return ({
 
@@ -71,8 +66,8 @@ const createList = ( onHide: () => void, state: State ):Link[] => {
     right: <div>{ size.value }px</div>,
     active: state.fontSize === size.value ? true : false ,
     onClick: () => {
-      onClick( size.value );
-      onHide();
+      state.fontSize = size.value;
+      onCallback();
     },
   })
 } )
@@ -82,7 +77,7 @@ const createList = ( onHide: () => void, state: State ):Link[] => {
 interface Params {
   canvasRemPadding: boolean,
   docsRemPadding: boolean,
-  sizes: RootFontsize[],
+  sizes: Fontsize[],
 }
 
 
@@ -129,10 +124,11 @@ const Tool: FunctionComponent<Props> = ( { api }) => {
 
   state.fontSize = Array.isArray( params.sizes ) && params.sizes.length ? params.sizes[Math.round((params.sizes.length - 1) / 2)].value : 16;
   const channel = api.getChannel();
+
   useEffect(() => {
-    channel.on(DOCS_RENDERED, updatePreview);
+    channel.addListener(DOCS_RENDERED, updatePreview );
     return () => {
-      channel.removeListener(DOCS_RENDERED, updatePreview);
+      channel.removeListener(DOCS_RENDERED, updatePreview );
     };
   });
 
@@ -142,7 +138,11 @@ const Tool: FunctionComponent<Props> = ( { api }) => {
         placement="top"
         trigger="click"
         tooltip={({ onHide }) => {
-          const list = createList( onHide, state )
+          const list = createList( () => {
+            onHide();
+            updatePreview();
+            channel.emit( ON_REM_UPDATE, state.sizes.find( size => size.value === state.fontSize ) )
+          }, state )
           return <TooltipLinkList links={list} />;
         }}
         closeOnClick

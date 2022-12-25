@@ -69,6 +69,29 @@ export const parameters = {
 };
 ```
 
+## Events
+
+You can listen for the `rem-update` event via the addons channel:
+
+```js
+const channel = api.getChannel();
+
+// On mount
+useEffect(() => {
+  channel.addListener( 'rem-update', onRemUpdate );
+
+  return () => {
+
+    // On unmount
+    channel.removeListener( 'rem-update', onRemUpdate );
+  };
+});
+
+const onRemUpdate = ( data ) => {
+  console.log( data.title, data.value );
+}
+```
+
 
 ## Storybook addon REM development
 
@@ -107,8 +130,8 @@ nvm use lts/gallium
 
 ## Roadmap
 
+- ~~Integrate Storybook events~~
 - Update icon(s)
-- Integrate Storybook events
 
 ## Notes
 
