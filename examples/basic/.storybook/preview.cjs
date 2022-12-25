@@ -6,4 +6,12 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  rem: {
+    canvasRemPadding: false,
+    docsRemPadding: false,
+    // sizes: [
+    //   { value: 8, title: 'Tiny' },
+    //   { value: 12, title: 'Medium' },
+    // ]
+  },
 }

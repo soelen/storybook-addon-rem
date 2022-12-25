@@ -1,18 +1,16 @@
-import { API } from '@storybook/api'
+import { API, useParameter } from '@storybook/api'
 import { IconButton, WithTooltip, TooltipLinkList } from '@storybook/components';
+import { DOCS_RENDERED } from '@storybook/core-events';
 
-import React, { FunctionComponent, ReactNode, } from 'react';
+import React, { FunctionComponent, ReactNode, useEffect, } from 'react';
+import { ADDON_ID } from './constants';
 import Rem from './icons/Rem';
-
-interface Props {
-  api: API
-}
 
 /**
  * Update the preview iframe class
  */
 
-const updatePreview = ( fontSize: number ) => {
+const updatePreview = () => {
   const iframe = document
     .getElementById( 'storybook-preview-iframe') as HTMLIFrameElement;
 
@@ -30,78 +28,121 @@ const updatePreview = ( fontSize: number ) => {
 
   // const fontSize = parseFloat(style);
   // root.style.fontSize = `${ fontSize - 2 }px`;
-  root.style.fontSize = `${ fontSize }px`;
+  root.style.fontSize = `${ state.fontSize }px`;
 
   // Remove rem padding from iframe body
 
-  const body = root.querySelector( 'body' ) as HTMLBodyElement;
-  if( !body ) return;
-  body.style.padding = `16px`;
-};
+  const body = root.querySelector( '.sb-main-padded' ) as HTMLBodyElement;
+  if( body && !state.canvasRemPadding ) body.style.padding = `16px`;
 
-type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  // Remove rem padding from docs wrapper
+
+  const sbDocsWrapper = root.querySelector( '.sbdocs-wrapper' ) as HTMLElement;
+  if( sbDocsWrapper && !state.docsRemPadding ) {
+    sbDocsWrapper.style.paddingTop = `64px`;
+    sbDocsWrapper.style.paddingBottom = `64px`;
+  }
+};
 
 type RootFontsize = {
-  [key in Size]: {
-    value: number,
-    title: string,
-  };
+  value: number,
+  title: string,
 }
-
-/**
- * Non reactive state. Seems to be working for now.
- */
-
-let activeState: Size = 'md';
-
-const rootFontsizes: RootFontsize = {
-  xs: { value: 8, title: 'Extra Small' },
-  sm: { value: 12, title: 'Small' },
-  md: { value: 16, title: 'Default' },
-  lg: { value: 24, title: 'Large', },
-  xl: { value: 48, title: 'Extra Large', }
-};
 
 interface Link {
   id: string;
-  size: Size,
   title: ReactNode;
   right?: ReactNode;
   active: boolean;
   onClick: () => void;
 }
 
-const onClick = ( size: Size ) => {
-  activeState = size;
-  updatePreview( rootFontsizes[size].value );
+const onClick = ( fontSize: number ) => {
+  state.fontSize = fontSize;
+  updatePreview();
 };
 
-const createList = ( onHide: () => void, active: Size ):Link[] => {
-  return Object.keys( rootFontsizes ).map(( key ) => {
-    const size = key as Size;
+const createList = ( onHide: () => void, state: State ):Link[] => {
+  return state.sizes.map(( size ) => {
     return ({
 
-    id: `rem-${ size }`,
-    size: size,
-    title: <div>{ rootFontsizes[size].title }</div>,
-    right: <div>{ rootFontsizes[ size ].value }px</div>,
-    active: size === active ? true : false ,
+    id: `rem-${ size.value }`,
+    title: <div>{ size.title }</div>,
+    right: <div>{ size.value }px</div>,
+    active: state.fontSize === size.value ? true : false ,
     onClick: () => {
-      onClick( size );
+      onClick( size.value );
       onHide();
     },
   })
-})
+} )
+
 }
 
-const Tool: FunctionComponent<Props> = ( { api } ) => {
+interface Params {
+  canvasRemPadding: boolean,
+  docsRemPadding: boolean,
+  sizes: RootFontsize[],
+}
+
+
+/**
+ * Non reactive state.
+ */
+
+interface State extends Params {
+  fontSize: number,
+}
+
+const state : State = {
+  canvasRemPadding: false,
+  docsRemPadding: false,
+  fontSize: 16,
+  sizes: [
+    { value: 8, title: 'Extra Small' },
+    { value: 12, title: 'Small' },
+    { value: 16, title: 'Default' },
+    { value: 24, title: 'Large', },
+    { value: 48, title: 'Extra Large', }
+  ]
+};
+
+
+const defaultParams: Params = {
+  canvasRemPadding: false,
+  docsRemPadding: false,
+  sizes: [],
+}
+
+interface Props {
+  api: API
+}
+
+const Tool: FunctionComponent<Props> = ( { api }) => {
+  const params = useParameter<Params>( 'rem', defaultParams);
+  state.canvasRemPadding = params.canvasRemPadding ? true : false;
+  state.docsRemPadding = params.docsRemPadding ? true : false;
+
+  state.sizes = Array.isArray( params.sizes ) && params.sizes.length ? params.sizes : state.sizes;
+  state.sizes = state.sizes.filter( size => size.title && size.value );
+  if( !state.sizes.length ) throw new Error( `No or wrong sizes provided as parameter in ${ ADDON_ID }.` );
+
+  state.fontSize = Array.isArray( params.sizes ) && params.sizes.length ? params.sizes[Math.round((params.sizes.length - 1) / 2)].value : 16;
+  const channel = api.getChannel();
+  useEffect(() => {
+    channel.on(DOCS_RENDERED, updatePreview);
+    return () => {
+      channel.removeListener(DOCS_RENDERED, updatePreview);
+    };
+  });
+
   return(
     <>
       <WithTooltip
         placement="top"
         trigger="click"
         tooltip={({ onHide }) => {
-          const list = createList( onHide, activeState )
+          const list = createList( onHide, state )
           return <TooltipLinkList links={list} />;
         }}
         closeOnClick

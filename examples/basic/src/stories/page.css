@@ -1,7 +1,7 @@
 section {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 0.875rem;
+  line-height: 1.5;
   padding: 48px 20px;
   margin: 0 auto;
   max-width: 600px;
@@ -10,7 +10,7 @@ section {
 
 section h2 {
   font-weight: 900;
-  font-size: 32px;
+  font-size: 2rem;
   line-height: 1;
   margin: 0 0 4px;
   display: inline-block;
@@ -36,29 +36,26 @@ section li {
 }
 
 section .tip {
-  display: inline-block;
   border-radius: 1em;
-  font-size: 11px;
-  line-height: 12px;
   font-weight: 700;
+  font-size: 1rem;
   background: #e7fdd8;
   color: #66bf3c;
   padding: 4px 12px;
   margin-right: 10px;
-  vertical-align: top;
 }
 
 section .tip-wrapper {
-  font-size: 13px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25;
   margin-top: 40px;
   margin-bottom: 40px;
 }
 
 section .tip-wrapper svg {
   display: inline-block;
-  height: 12px;
-  width: 12px;
+  height: 0.75rem;
+  width: 0.75rem;
   margin-right: 4px;
   vertical-align: top;
   margin-top: 3px;
