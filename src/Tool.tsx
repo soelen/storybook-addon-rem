@@ -23,12 +23,15 @@ const updatePreview = () => {
 
   if ( !root ) return;
 
-
   const style = window.getComputedStyle( root, null ).getPropertyValue('font-size');
 
   // const fontSize = parseFloat(style);
   // root.style.fontSize = `${ fontSize - 2 }px`;
-  root.style.fontSize = `${ state.fontSize }px`;
+  if (state.fontSize !== null) {
+    root.style.fontSize = `${ state.fontSize }px`;
+  } else {
+    root.style.fontSize = ""
+  }
 
   // Remove rem padding from iframe body
 
@@ -58,20 +61,32 @@ interface Link {
 }
 
 const createList = ( onCallback: () => void, state: State ):Link[] => {
-  return state.sizes.map(( size ) => {
-    return ({
-
-    id: `rem-${ size.value }`,
-    title: <div>{ size.title }</div>,
-    right: <div>{ size.value }px</div>,
-    active: state.fontSize === size.value ? true : false ,
-    onClick: () => {
-      state.fontSize = size.value;
-      onCallback();
+  const resetLink: Link = {
+    active: false,
+    id: "rem-reset",
+    onClick(): void {
+      state.fontSize = null;
+      onCallback()
     },
-  })
-} )
+    right: "",
+    title: "Reset"
+  }
 
+  return [
+    resetLink,
+    ...state.sizes.map(( size ) => {
+      return ({
+        id: `rem-${ size.value }`,
+        title: <div>{ size.title }</div>,
+        right: <div>{ size.value }px</div>,
+        active: state.fontSize === size.value ,
+        onClick: () => {
+          state.fontSize = size.value;
+          onCallback();
+        },
+      })
+    })
+  ]
 }
 
 interface Params {
@@ -86,7 +101,7 @@ interface Params {
  */
 
 interface State extends Params {
-  fontSize: number,
+  fontSize: number | null,
 }
 
 const state : State = {

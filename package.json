@@ -65,7 +65,7 @@
     "@storybook/addons": "^6.5.15",
     "@storybook/api": "^6.5.15",
     "@storybook/components": "^6.5.15",
-    "@types/react": "^18.0.26"
+    "@types/react": "^18.0.27"
   },
   "storybook": {
     "displayName": "Rem",
