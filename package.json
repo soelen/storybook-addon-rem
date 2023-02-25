@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-rem",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A storybook addon which helps you to test how your REM sized components behave.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
